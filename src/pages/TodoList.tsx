@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { Card, Container, Button, Form, Table, Row, Col } from 'react-bootstrap';
 
-import { getProvider, getAccount, getEthereumContract, isWalletConnected, connectWallet } from './metamask';
-import { useGlobalState, truncate } from './store';
+import { getProvider, getAccount, getEthereumContract, isWalletConnected, connectWallet } from '../utils/metamask';
+import { useGlobalState, truncate } from '../utils/store';
 
 import todoListArtifact from "../artifacts/contracts/TodoList.sol/TodoList.json";
 
