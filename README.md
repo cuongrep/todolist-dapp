@@ -6,7 +6,7 @@
 <h1 align="center">
   Gatsby minimal TypeScript starter
 </h1>
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/792eb8e0-1231-4bd4-8aec-9d85e60d5387/deploy-status)](https://app.netlify.com/sites/todo-list-dapp/deploys)
 ## 🚀 Quick start
 
 1.  **Create a Gatsby site.**
