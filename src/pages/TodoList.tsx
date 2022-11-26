@@ -3,7 +3,6 @@ import { ethers } from 'ethers';
 import { Card, Container, Button, Form, Table, Row, Col } from 'react-bootstrap';
 import { getProvider, getAccount, getEthereumContract, isWalletConnected, connectWallet } from '../utils/metamask';
 import { useGlobalState, truncate } from '../utils/store';
-import todoListArtifact from '../artifacts/contracts/TodoList.sol/TodoList.json';
 import { TodoListABI } from '../abi/TodoListABI'
 
 type Props = {
@@ -173,7 +172,6 @@ const Content = ({ contract }: Props) => {
 
 export default function TodoList() {  
   const todoListAddress = process.env.TodoListAddress;
-  const todoListContractABI = todoListArtifact.abi;
   const todoListContract = getEthereumContract(todoListAddress, TodoListABI);
   
   useEffect(() => {
