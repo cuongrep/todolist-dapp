@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { getGlobalState, setGlobalState } from './store';
 
+declare let window: any;
 /**
  * @returns a provider that is a connection to the Ethereum network
  */

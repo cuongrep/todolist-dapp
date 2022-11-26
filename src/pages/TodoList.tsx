@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { Card, Container, Button, Form, Table, Row, Col } from 'react-bootstrap';
-
 import { getProvider, getAccount, getEthereumContract, isWalletConnected, connectWallet } from '../utils/metamask';
 import { useGlobalState, truncate } from '../utils/store';
-
-import todoListArtifact from "../artifacts/contracts/TodoList.sol/TodoList.json";
-
+import todoListArtifact from '../artifacts/contracts/TodoList.sol/TodoList.json';
+import { TodoListABI } from '../abi/TodoListABI'
 
 type Props = {
   contract: ethers.Contract
@@ -173,10 +171,10 @@ const Content = ({ contract }: Props) => {
   );
 }
 
-export default function TodoList() {
+export default function TodoList() {  
   const todoListAddress = process.env.TodoListAddress;
   const todoListContractABI = todoListArtifact.abi;
-  const todoListContract = getEthereumContract(todoListAddress, todoListContractABI);
+  const todoListContract = getEthereumContract(todoListAddress, TodoListABI);
   
   useEffect(() => {
     isWalletConnected().then(() => console.log('Blockchain Loaded'));
@@ -187,6 +185,7 @@ export default function TodoList() {
       <Content contract={todoListContract} />
     );
   } else {
+    console.log("TodoListABI", TodoListABI);
     return (
       <>
         <p>Please install Metamask and connect to Wallet</p>
