@@ -90,9 +90,9 @@ npm install --save-dev @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat
 
 #### Todo List smart contract
 Some methods provided the smart contract
-- create a new task
-- get all task of an owner
-- check task done or not
+- Create a new task
+- Get all task of a current request sender
+- Check task done or not
 - The full smart contract goes as follows:
 ### Deploy on Goerli
 - Get Alchemy key
@@ -103,3 +103,8 @@ Some methods provided the smart contract
 - configure Github
 - Deploy
 - show link to connect
+
+### Issue
+You will got problem if you use the compiled artifacts output in our Hardhat project in the gatsby product because it is a json file
+Solution is: we will use a file with human-readable ABI instead of the compiled artifacts output in our Hardhat project.
+https://docs.ethers.io/v5/api/utils/abi/formats/#abi-formats--human-readable-abi

@@ -20,29 +20,6 @@ const Content = ({ contract }: Props) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [content, setContent] = useState<string>('');
 
-  const fakeTask = [
-    {
-      id: 1,
-      content: "join the morning meeting",
-      completed: true
-    },
-    {
-      id: 2,
-      content: "ask @mohan san, could I continue todo the user management task",
-      completed: true
-    },
-    {
-      id: 3,
-      content: "list all tasks should be done today",
-      completed: false
-    },
-    {
-      id: 4,
-      content: "summary what I've done",
-      completed: false
-    }
-  ]
-
   const getTasks = async () => {
     const result = await contract.getAllOfSender();
     console.log("result", result);
@@ -84,6 +61,23 @@ const Content = ({ contract }: Props) => {
     const transaction: Promise<any> = await contract.createTask(content);
     await transaction.wait();
     console.log("created a new Task");
+    setContent("");
+    getTasks();
+  }
+
+  const handleCreateTask = async () => {
+    console.log("handleCreateNewTask")
+    if (content === '') return;
+    await requestCreateTask();
+    console.log("handledCreateNewTask")
+  }
+
+  const requestDeleteTask = async(taskId: number) => {
+    console.log("requestDeleteTask");
+    const transaction: Promise<any> = await contract.burn(taskId);
+    await transaction.wait();
+    console.log("deleted an existing Task");
+    setContent("");
     getTasks();
   }
 
@@ -93,11 +87,6 @@ const Content = ({ contract }: Props) => {
     getTasks();
   }
   
-  const handleCreateTask = async () => {
-    if (content === '') return;
-    await requestCreateTask();
-    console.log("handleCreateNewTask")
-  }
 
   return (
     <Container fluid>
@@ -131,20 +120,27 @@ const Content = ({ contract }: Props) => {
                 </Form.Group>
               </Form> 
               <div>
-                <Table responsive striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Task</th>
-                      <th>Completed</th>
+                <Table responsive="md" striped bordered hover>
+                  <thead >
+                    <tr className='d-flex'>
+                      <th className='col-1'>#</th>
+                      <th className='col-1'>Del</th>
+                      <th className='col-9'>Task</th>
+                      <th className='col-1'>Done</th>
                     </tr>
                   </thead>
                   <tbody>
                     {tasks.map((t, index) => (
-                      <tr key={`task.${index}`}>
-                        <td>{t.id}</td>
-                        <td>{t.content}</td>
-                        <td>
+                      <tr key={`task.${index}`} className='d-flex'>
+                        <td className='col-1'>{t.id}</td>
+                        <td className='col-1'>
+                          <button className="btn btn-outline-danger" onClick={() => requestDeleteTask(t.id)}>
+                            {/* <i className="icon bi-envelope"></i> */}
+                            <i className="icon bi bi-x"></i>
+                          </button>
+                        </td>
+                        <td className='col-9'>{t.content}</td>
+                        <td className='col-1'>
                           <input
                             type="checkbox"
                             checked={t.completed}

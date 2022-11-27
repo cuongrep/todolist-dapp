@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import { ethers } from 'ethers'
 import type { HeadFC, PageProps } from "gatsby"
-import TodoListArtifact from "../artifacts/contracts/TodoList.sol/TodoList.json";
-const tokenAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import TodoList from "./TodoList";
 
 // function App() {
